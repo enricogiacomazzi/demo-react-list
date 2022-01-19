@@ -3,11 +3,10 @@ import logo from './logo.svg';
 import './App.css';
 import List from './components/List';
 import {ItemModel} from './models/itemModel';
+import produce from "immer"
 
 
 const App: React.FC = () => {
-
-    const [items, setItems] = useState<Array<ItemModel>>([]);
 
     const tmpItems: Array<ItemModel> = [
         {
@@ -24,8 +23,32 @@ const App: React.FC = () => {
         }
     ].map(x => ({id: Math.random(), ...x}));
 
-    const toggleCompleted = (id: ItemModel) => {
-      console.log('cliccato', id);
+    const [items, setItems] = useState<Array<ItemModel>>(tmpItems);
+
+    const toggleCompleted = (item: ItemModel) => {
+        const updatedItems = produce(items, draft => {
+            const index = draft.findIndex(x => x.id === item.id);
+            draft[index].completed = !item.completed;
+        });
+
+        setItems(updatedItems);
+
+        // setItems(items.map(i => {
+        //     if(i.id === item.id) {
+        //         return {
+        //             ...i,
+        //             completed: !i.completed
+        //         }
+        //         // i.completed = !i.completed;
+        //         // return i;
+        //     }
+        //     return i;
+        //
+        // }));
+
+        // const index = items.findIndex(x => x.id === item.id);
+        // items[index].completed = !items[index].completed;
+        // setItems([...items]);
     }
 
 

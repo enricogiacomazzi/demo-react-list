@@ -9,6 +9,8 @@ interface ListProps {
 
 const List: React.FC<ListProps> = ({items, changeCompleted}) => {
 
+    console.log('render');
+
     return (
         <ul>
             {items.map(({id, ...rest}) =>
