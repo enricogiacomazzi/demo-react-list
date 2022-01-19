@@ -22,7 +22,6 @@ const List: React.FC<ListProps> = ({items, changeCompleted, onDelete}) => {
                     onDelete={() => onDelete(item)}
                 />)
             }
-            <button className="btn">demo</button>
         </ul>
     )
 }
