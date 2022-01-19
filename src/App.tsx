@@ -51,9 +51,18 @@ const App: React.FC = () => {
         // setItems([...items]);
     }
 
+    const deleteItem = (item: ItemModel) => {
+        // setItems(items.filter(x => x.id !== item.id));
+        const updatedItems = produce(items, draft => {
+            const index = draft.findIndex(x => x.id === item.id);
+            draft.splice(index, 1);
+        });
+        setItems(updatedItems);
+    }
+
 
     return (
-        <List items={items} changeCompleted={toggleCompleted}/>
+        <List items={items} changeCompleted={toggleCompleted} onDelete={deleteItem}/>
     )
 }
 

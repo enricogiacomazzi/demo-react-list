@@ -5,21 +5,24 @@ import Item from './Item';
 interface ListProps {
     items: Array<ItemModel>,
     changeCompleted: (item: ItemModel) => void;
+    onDelete: (item: ItemModel) => void;
 }
 
-const List: React.FC<ListProps> = ({items, changeCompleted}) => {
+const List: React.FC<ListProps> = ({items, changeCompleted, onDelete}) => {
 
     console.log('render');
 
     return (
         <ul>
-            {items.map(({id, ...rest}) =>
+            {items.map((item) =>
                 <Item
-                    key={id}
-                    {...rest}
-                    changeCompleted={() => changeCompleted({id, ...rest})}
+                    key={item.id}
+                    {...item}
+                    changeCompleted={() => changeCompleted(item)}
+                    onDelete={() => onDelete(item)}
                 />)
             }
+            <button className="btn">demo</button>
         </ul>
     )
 }
