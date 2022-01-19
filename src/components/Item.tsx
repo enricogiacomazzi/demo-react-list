@@ -1,7 +1,8 @@
 import React from 'react';
 // import './Item.css';
-import css from './Item.module.css';
+import cssModule from './Item.module.css';
 import classNames from 'classnames';
+import {css} from '@emotion/css';
 
 interface ItemProps {
     //item: ItemModel
@@ -20,13 +21,24 @@ const Item:React.FC<ItemProps> = ({text = "pippo", completed, changeCompleted, o
         {'fa-check': completed},
         {'fa-times': !completed},
     ]);
+
+    const textStyle: React.CSSProperties = {
+        backgroundColor: 'lightcoral',
+        textDecoration: completed ? 'line-through' : 'inherit'
+    }
+
+    const pippo = css`
+      background-color: lightcoral;
+      text-decoration: ${completed ? 'line-through' : 'inherit'}
+    `;
+
     return (
         <li>
-            {text}
-            <button className={css.btn} onClick={() => changeCompleted()}>
+            <span className={pippo}>{text}</span>
+            <button className={cssModule.btn} onClick={() => changeCompleted()}>
                 <i className={doneCss}/>
             </button>
-            <button className={css.btn} onClick={() => onDelete()}>
+            <button className={cssModule.btn} onClick={() => onDelete()}>
                 <i className="fa fa-trash"/>
             </button>
         </li>
