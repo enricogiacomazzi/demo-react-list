@@ -10,16 +10,18 @@ interface MyInputProps {
 const MyInput: React.FC<MyInputProps> = (props) => {
     const [state, setState] = useState<string | undefined>(props.value ?? '');
 
-    useEffect(() => {
-        setState(valid(props.value));
-    }, [props.value, props.validationRgx]);
-
     const valid = (value: string | undefined): string | undefined => {
         if(!props.validationRgx) {
             return value;
         }
         return (value ?? '').replace(props.validationRgx, '');
     }
+
+    useEffect(() => {
+        setState(valid(props.value));
+    }, [props.value, props.validationRgx, valid]);
+
+
 
     const onchangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
         let value = valid(e.currentTarget.value) ;
