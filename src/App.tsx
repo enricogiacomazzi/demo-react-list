@@ -6,6 +6,7 @@ import {ItemModel} from './models/itemModel';
 import produce from "immer"
 import Card from './components/Card';
 import MyInput from './components/MyInput';
+import MyForm from './components/MyForm';
 
 
 const App: React.FC = () => {
@@ -95,14 +96,20 @@ const App: React.FC = () => {
     }
 
     return (
-        <Card>
-            <List items={items} changeCompleted={toggleCompleted} onDelete={deleteItem}/>
-            <br/>
-            {/*<input ref={inputElement} type="text"/>*/}
-            <MyInput type="email" value={'ciao'} onChange={(value) =>  console.log('cambia', value)}/>
-            <input value={inputValue} onChange={inputChange} type="text"/>
-            <button onClick={addItem}>Aggiungi</button>
-        </Card>
+        <>
+            <Card>
+                <List items={items} changeCompleted={toggleCompleted} onDelete={deleteItem}/>
+                <br/>
+                {/*<input ref={inputElement} type="text"/>*/}
+                {/*<MyInput type="email" value={'ciao'} onChange={(value) =>  console.log('cambia', value)}/>*/}
+                <input value={inputValue} onChange={inputChange} type="text"/>
+                <button onClick={addItem}>Aggiungi</button>
+            </Card>
+            <Card>
+                <MyForm />
+            </Card>
+        </>
+
     )
 }
 
